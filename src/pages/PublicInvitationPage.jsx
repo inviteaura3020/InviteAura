@@ -151,7 +151,7 @@ function PublicInvitationPage() {
       <Events invitation={invitation} />
       <Venue invitation={invitation} />
       <PhotoGallery photos={invitation.photos} />
-      <RSVP invitation={invitation} />
+      <RSVP invitation={invitation} isPreview={isPreview} />
       <Footer invitation={invitation} />
     </div>
   );
