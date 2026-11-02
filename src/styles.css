@@ -1790,3 +1790,153 @@ footer small b {
  .ia-homepage .ia-home-footer-links{justify-content:center}
  .ia-homepage .ia-contact-cta{flex-direction:column;text-align:center}
 }
+
+/* =========================================================
+   INVITEAURA — OPTIONAL PUBLIC INVITATION MOTION ADD-ON
+   Additive only: existing styles, layouts, colors and admin
+   screens above are intentionally left unchanged.
+   ========================================================= */
+@keyframes iaPublicFadeUp {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes iaPublicSoftFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Gentle entrance for the invitation hero; no layout dimensions changed. */
+.public-invitation #home .hero > * {
+  animation: iaPublicFadeUp .75s cubic-bezier(.2,.7,.25,1) both;
+}
+.public-invitation #home .hero > *:nth-child(1) { animation-delay: .08s; }
+.public-invitation #home .hero > *:nth-child(2) { animation-delay: .18s; }
+.public-invitation #home .hero > *:nth-child(3) { animation-delay: .28s; }
+.public-invitation #home .hero > *:nth-child(4) { animation-delay: .38s; }
+.public-invitation #home .hero > *:nth-child(5) { animation-delay: .48s; }
+.public-invitation #home .hero > *:nth-child(6) { animation-delay: .58s; }
+
+/* Progressive enhancement: reveal content as it enters the viewport.
+   Browsers without scroll-driven animation support keep content visible. */
+@supports (animation-timeline: view()) {
+  .public-invitation #story,
+  .public-invitation #events,
+  .public-invitation .count,
+  .public-invitation .venue,
+  .public-invitation #rsvp,
+  .public-invitation .photo-gallery-section {
+    animation: iaPublicFadeUp linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 32%;
+  }
+}
+
+/* Small, non-disruptive feedback on interactive elements. */
+.public-invitation .outline,
+.public-invitation .submit,
+.public-invitation .rsvp-choice,
+.public-invitation .event-card {
+  transition-property: transform, box-shadow, border-color, background-color;
+  transition-duration: .25s;
+  transition-timing-function: ease;
+}
+
+.public-invitation .rsvp-choice:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .public-invitation #home .hero > *,
+  .public-invitation #story,
+  .public-invitation #events,
+  .public-invitation .count,
+  .public-invitation .venue,
+  .public-invitation #rsvp,
+  .public-invitation .photo-gallery-section {
+    animation: none !important;
+  }
+  .public-invitation .rsvp-choice {
+    transition: none !important;
+  }
+}
+
+
+/* =========================================================
+   INVITEAURA — VISIBLE MOTION FIX
+   Appended only. Existing design/layout rules are untouched.
+   Works on the showcase homepage and public invitation page.
+   ========================================================= */
+@keyframes iaMotionFadeUp {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes iaMotionFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes iaMotionFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Main InviteAura homepage: visible immediately on page load. */
+.ia-homepage .ia-home-hero-copy { animation: iaMotionFadeUp .85s ease-out both; }
+.ia-homepage .ia-home-art { animation: iaMotionFadeIn 1.1s ease-out both; }
+.ia-homepage .ia-home-floating { animation: iaMotionFloat 4s ease-in-out 1s infinite; }
+.ia-homepage .ia-home-section-heading,
+.ia-homepage .ia-home-feature-grid article,
+.ia-homepage .ia-type-card,
+.ia-homepage .ia-home-steps article,
+.ia-homepage .ia-contact-grid article { animation: iaMotionFadeUp .7s ease-out both; }
+.ia-homepage .ia-home-feature-grid article:nth-child(2),
+.ia-homepage .ia-type-card:nth-child(2),
+.ia-homepage .ia-home-steps article:nth-child(2),
+.ia-homepage .ia-contact-grid article:nth-child(2) { animation-delay: .12s; }
+.ia-homepage .ia-home-feature-grid article:nth-child(3),
+.ia-homepage .ia-type-card:nth-child(3),
+.ia-homepage .ia-home-steps article:nth-child(3),
+.ia-homepage .ia-contact-grid article:nth-child(3) { animation-delay: .24s; }
+.ia-homepage .ia-home-feature-grid article:nth-child(4),
+.ia-homepage .ia-type-card:nth-child(4) { animation-delay: .36s; }
+
+/* Public wedding invitation: hero and sections animate on page load. */
+.public-invitation #home .hero { animation: iaMotionFadeUp .9s ease-out both; }
+.public-invitation #home .ganesh { animation: iaMotionFadeIn 1.2s ease-out .35s both; }
+.public-invitation #story,
+.public-invitation .count,
+.public-invitation #events,
+.public-invitation .venue,
+.public-invitation #rsvp,
+.public-invitation .photo-gallery-section { animation: iaMotionFadeUp .85s ease-out both; }
+.public-invitation .cards article,
+.public-invitation .photo-gallery-item,
+.public-invitation .rsvp-choice { animation: iaMotionFadeIn .8s ease-out both; }
+.public-invitation .cards article:nth-child(2),
+.public-invitation .photo-gallery-item:nth-child(2),
+.public-invitation .rsvp-choice:nth-child(2) { animation-delay: .12s; }
+.public-invitation .cards article:nth-child(3),
+.public-invitation .photo-gallery-item:nth-child(3) { animation-delay: .24s; }
+
+/* Subtle hover motion; no dimensions, colors or layout are changed. */
+.public-invitation .photo-gallery-item img { transition: transform .55s ease; }
+.public-invitation .photo-gallery-item:hover img { transform: scale(1.045); }
+.public-invitation .outline:hover,
+.public-invitation .submit:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ia-homepage .ia-home-hero-copy, .ia-homepage .ia-home-art,
+  .ia-homepage .ia-home-floating, .ia-homepage .ia-home-section-heading,
+  .ia-homepage .ia-home-feature-grid article, .ia-homepage .ia-type-card,
+  .ia-homepage .ia-home-steps article, .ia-homepage .ia-contact-grid article,
+  .public-invitation #home .hero, .public-invitation #home .ganesh,
+  .public-invitation #story, .public-invitation .count,
+  .public-invitation #events, .public-invitation .venue,
+  .public-invitation #rsvp, .public-invitation .photo-gallery-section,
+  .public-invitation .cards article, .public-invitation .photo-gallery-item,
+  .public-invitation .rsvp-choice {
+    animation: none !important;
+    transform: none !important;
+  }
+  .public-invitation .photo-gallery-item img { transition: none !important; }
+}
